@@ -1,22 +1,22 @@
-# 🧠 n8n + Ollama Integration  
-A complete automation setup using **n8n**, **Ollama (local AI)**, and **Google Drive / OneDrive** to process files and generate intelligent responses.
+# 🧠 n8n + Ollama Integration
+
+This repository connects an n8n workflow to Google Drive and an Ollama model. It includes the exported workflow and a Docker Compose configuration for n8n, PostgreSQL and Ollama; credentials and service endpoints need to be configured for your own environment.
 
 ## 📦 Project Structure
 
 ```
 📁 project-root/
-├── docker-compose.yml              # Contains n8n + PostgreSQL + Ollama integration
+├── docker-compose.yaml              # Contains n8n + PostgreSQL + Ollama integration
 ├── Workflow.json                   # Exported n8n workflow
-├── Operation.mp4                   # Flow operation
-└── README.md                       # Documentation
+└── readme.md                       # Documentation
 ```
 
 ## 🚀 How It Works
 
 1. **n8n** runs inside a Docker container with a PostgreSQL database.  
-2. **Ollama** runs locally on your machine (or optionally as a Docker container).  
+2. **Ollama** is included as a service in the Compose file. A host installation can be used instead if you adjust the workflow endpoint.  
 3. The n8n workflow:
-   - Reads files from a **Google Drive** or **OneDrive** folder  
+   - Reads files from a **Google Drive** folder  
    - Sends the file content to **Ollama**  
    - Receives the AI model response (e.g., LLaMA 3)  
    - Returns or stores the result (e.g., in a spreadsheet, database, or notification)
@@ -25,20 +25,20 @@ A complete automation setup using **n8n**, **Ollama (local AI)**, and **Google D
 
 ### 1️⃣ Clone the project
 ```bash
-git clone <repository-url>
-cd <project-folder>
+git clone https://github.com/nicholasbirochi/Ollama-AI-Automation-n8n.git
+cd Ollama-AI-Automation-n8n
 ```
 
 ### 2️⃣ Start the containers
 ```bash
-docker compose up -d
+docker compose -f docker-compose.yaml up -d
 ```
 
 Containers:
 - `n8n`: dashboard available at [http://localhost:5678](http://localhost:5678)
 - `postgres`: internal database for n8n
 
-> 🔸 Ollama must be running locally on port **11434**.  
+> 🔸 The Compose file includes Ollama on port **11434**; review the workflow URL before executing it.  
 > If it’s running outside Docker (on Windows/macOS/Linux), n8n can reach it using:
 > ```
 > http://host.docker.internal:11434/api/generate
@@ -51,11 +51,11 @@ Containers:
 
 2. Import the workflow file:
    ```
-   My workflow.json
+   Workflow.json
    ```
    > Menu → Import → Import from File
 
-3. Edit the **Google Drive** or **OneDrive** node:
+3. Edit the **Google Drive** node:
    - Create a new credential (OAuth)
    - Select the folder you want to monitor
    - Set the operation to `List` or `Trigger on File Created`
@@ -72,7 +72,7 @@ Containers:
    http://host.docker.internal:11434/api/generate
    ```
 
-## ☁️ Environment Variables (in `docker-compose.yml`)
+## ☁️ Environment Variables (in `docker-compose.yaml`)
 
 ```yaml
 environment:
@@ -126,3 +126,7 @@ curl http://localhost:11434/api/tags
 **Nicholas Birochi**  
 Automation and Data Workflows with Local AI 💡  
 📍 Brazil | ⚙️ n8n | 🧠 Ollama | ☁️ Docker | 🔗 Data Automation
+
+## License
+
+Original code and documentation are covered by [MIT](license).

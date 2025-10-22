@@ -7,7 +7,7 @@ A complete automation setup using **n8n**, **Ollama (local AI)**, and **Google D
 📁 project-root/
 ├── docker-compose.yml              # Contains n8n + PostgreSQL + Ollama integration
 ├── Reading PDFs with AI.json       # Exported n8n workflow
-├── Funcionamento.mp4               # Flow operation
+├── Operation.mp4                   # Flow operation
 └── README.md                       # Documentation
 ```
 

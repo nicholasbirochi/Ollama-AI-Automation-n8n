@@ -1,5 +1,5 @@
-# 🔹 Vídeos e mídias
+# 🔹 Videos e midias
 *.mp4
 
-# 🔹 n8n file
-*.json
+# 🔹 n8n file with confidential information
+Reading PDFs with AI.json
